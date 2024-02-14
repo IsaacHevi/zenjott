@@ -31,7 +31,7 @@ zenjott is a web application designed to support users in tracking their mental 
 
 ### Security and Privacy
 - Prioritizes user privacy and data security, ensuring that journal entries and personal information are securely stored and accessible only to the user.
-- Implementation of Google OAuth sign-in for enhanced security.
+- Implementation of Django Authentication sign-in for enhanced security.
 
 ## Technologies Used
 - Frontend: HTML, CSS, JavaScript
