@@ -1,0 +1,28 @@
+{% extends 'zenjottapp/layout.html' %}
+
+{% block title %}{{ entry.title }}{% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div class="single--div">
+        {% if entry.title %}
+        <h3 style="text-align: center;">{{ entry.title }}</h3>
+        {% endif %}
+        <p>{{ entry.content }}</p>
+        <p style="text-align: right; color: #777; margin-bottom: 0;">{{ entry.timestamp }}</p>
+    </div>
+    <div class="meme--info" style="background-color: rgb(240, 234, 234); box-shadow: none;">
+        <a href="{% url 'edit' entry.pk %}"><button class="entry--button">Edit</button></a><a href="{% url 'delete' entry.pk %}"><button class="entry--button">Delete</button></a>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'zenjottapp/layout.html' %}
+
+{% block title %}New Journal Entry{% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="journal--header">
+            <h2 style="font-weight: bold;">Add New Journal Entry</h2>
+        </div>
+        <div class="single--div">
+            <form class="row2--form" action="{% url 'new_entry' %}" method="post">
+                {% csrf_token %}
+                <div>
+                    {{ form.title }}
+                </div>
+                <div>
+                    {{ form.content }}
+                </div>
+                <button type="submit" class="row1--button">Add Entry</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

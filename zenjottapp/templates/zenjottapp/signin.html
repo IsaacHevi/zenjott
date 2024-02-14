@@ -1,0 +1,53 @@
+{% extends 'zenjottapp/layout.html' %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="journal--header">
+            <h2 style="font-weight: bold;">Sign In</h2>
+        </div>
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <strong>Error!</strong> Please correct the following errors:
+            <ul>
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li>{{ field }}: {{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <div class="single--div">
+            {% if message %}
+            <p style="color: red;">{{ message }}</p>
+            {% endif %}
+            <form class="row2--form" action="{% url 'signin' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Username:</label>
+                    <input type="text" class="form-control" id="{{ form.username.id_for_label }}" autofocus name="{{ form.username.html_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">Password:</label>
+                    <input type="password" class="form-control" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}">
+                </div>
+                <button style="margin: 10px auto; text-align: center;" type="submit" class="row1--button">Sign In</button>
+                <p style="margin-bottom: 0; margin-top: 10px; text-align: center;">Don't have an account? <a href="{% url 'register' %}" class="login">Sign Up</a></p>
+            </form>
+        </div>     
+    </main>
+{% endblock %}

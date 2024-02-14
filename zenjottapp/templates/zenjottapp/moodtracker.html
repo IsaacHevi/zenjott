@@ -1,0 +1,158 @@
+{% extends 'zenjottapp/layout.html' %}
+
+{% block title %}Mood Tracker{% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="row1--container">
+            <div class="row1--element mood--tracker--div">
+                <h2 style="text-align: center; margin-bottom: 0;">Mood Analysis</h2>
+                <div id="chartContainer">
+                    <canvas id="moodChart" width="500" height="400" class="pie--chart"></canvas>
+                </div>
+            </div>
+            <div class="row1--element">
+                <p id="quote"></p>
+            </div>
+        </div>
+        <div class="journal--header">
+            <h2>Notes</h2>
+            <p>Reflect on your moods from the past</p>
+        </div>
+        <div class="notes--container">
+            {% if whole_moods %}
+                {% for mood in whole_moods %}
+                    {% if mood.note %}
+                    <div id="note--container">
+                        <div id="note--date">
+                            {{ mood.timestamp }}
+                        </div>
+                        <div id="note">
+                            {{ mood.note}}
+                        </div>
+                        <div id="mood--mood">
+                            {% if mood.mood == "happy" %}
+                                😀
+                            {% elif mood.mood == "sad" %}
+                                😢
+                            {% elif mood.mood == "excited" %}
+                                😃
+                            {% elif mood.mood == "angry" %}
+                                😠
+                            {% elif mood.mood == "calm" %}
+                                😌
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p style="text-align: center; font-style: italic;"> You have not logged any mood yet</p>
+            {% endif %}
+        </div>
+    </main>
+    <script>
+        const moodData = JSON.parse('{{ moods|escapejs }}');
+
+        const ctx = document.getElementById('moodChart');
+
+        ctx.width = document.getElementById('chartContainer').offsetWidth;
+        ctx.height = document.getElementById('chartContainer').offsetHeight;
+
+        function createPieChart(data) {
+            const ctx = document.getElementById('moodChart').getContext('2d');
+            const moodCounts = countMoods(data);
+
+            const chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(moodCounts),
+                    datasets: [{
+                        data: Object.values(moodCounts),
+                        backgroundColor: getColors(Object.keys(moodCounts).length),
+                    }],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            align: 'end',
+                            labels: {
+                                boxWidth: 20,
+                                padding: 20
+                            }
+                        }
+                    },
+                }
+            });
+        }
+
+        function countMoods(data) {
+            const counts = {};
+            data.forEach(entry => {
+                counts[entry.mood] = (counts[entry.mood] || 0) + 1;
+            });
+            return counts;
+        }
+
+        function getColors(count) {
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                colors.push(`#${Math.floor(Math.random()*16777215).toString(16)}`);
+            }
+            return colors;
+        }
+
+        createPieChart(moodData);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const sentences = [
+            "Your mental health is just as important as your physical health",
+            "It's okay not to be okay",
+            "You are not your mental illness",
+            "Your struggles do not define you",
+            "You are worthy of happiness and peace of mind",
+            "There is no shame in seeking help for your mental health",
+            "It's okay to take a break and prioritize your mental health",
+            "You are not alone in your struggles",
+            "It's okay to ask for support when you need it",
+            "Mental health is not a destination, it's a journey",
+            "Your mental health matters more than any external validation",
+            "Healing is not linear, but it is possible",
+            "You are stronger than you realize",
+            "Your mental health journey is unique to you",
+            "Self-care is not selfish, it's necessary for good mental health",
+            "Small steps can lead to big progress in mental health",
+            "You are capable of overcoming your mental health challenges",
+            "Mental illness is not a personal failure, it's a medical condition",
+            "Your mental health should not be stigmatized",
+            "Taking care of your mental health is an act of self-love",
+            "Self-care is not selfish, it's necessary for good mental health",
+        ]
+
+
+            function displayRandomSentence() {
+                const randomIndex = Math.floor(Math.random() * sentences.length);
+                const pTag = document.getElementById("quote");
+                pTag.textContent = sentences[randomIndex];
+
+                console.log(sentences[randomIndex]);
+            }
+
+            setInterval(displayRandomSentence, 3000);
+        });
+    </script>
+{% endblock %}

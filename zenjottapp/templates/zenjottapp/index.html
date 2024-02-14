@@ -1,0 +1,128 @@
+{% extends 'zenjottapp/layout.html' %}
+
+{% load static %}
+
+{% block title %}Zenjott{% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="row1--container">
+            <div class="row1--element mood--element" id="mood--row">
+                <h2>Log Mood</h2>
+                <p>How are you feeling right now?</p>
+                <form action="{% url 'log_mood' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mood-selector">
+                        <input type="radio" name="mood" id="happy" value="happy">
+                        <label for="happy">😀 Happy</label>
+                        
+                        <input type="radio" name="mood" id="sad" value="sad">
+                        <label for="sad">😢 Sad</label>
+                        
+                        <input type="radio" name="mood" id="excited" value="excited">
+                        <label for="excited">😃 Excited</label>
+                        
+                        <input type="radio" name="mood" id="angry" value="angry">
+                        <label for="angry">😠 Angry</label>
+
+                        <input type="radio" name="mood" id="calm" value="calm">
+                        <label for="calm">😌 Calm</label>
+                    </div>
+                    <div>
+                        <p style="font-style: italic;">Leave a note about your mood...</p>
+                    </div>
+                    <div class="row1--form"> 
+                        <div>
+                            <input class="form-control me-2 search--box" type="text" name="note" style="font-style: italic;" placeholder="Had a productive day at work and so I'm very happy...." aria-label="text" autocomplete="off"><br>
+                        <button class="row1--button">Log Mood</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row1--element">
+                <h2>Add Journal Entry</h2>
+                <p style="font-style: italic;">Write about your day and feelings</p>
+                <form class="row2--form" action="{% url 'log_entry' %}" method="post">
+                    {% csrf_token %}
+                    <div>
+                        {{ form.title }}
+                    </div>
+                    <div>
+                        {{ form.content }}
+                    </div>
+                    <button type="submit" class="row1--button">Add Entry</button>
+                </form>
+            </div>
+        </div>
+        <div class="row2--container">
+            <div class="row2--element">
+                <h2>The Community</h2>
+                <p>Connect with others and share experiences</p>
+                <p>Discuss mental health issues with open-minded and supportive people in the community</p>
+                <a href="{% url 'community' %}"><button class="row2--button">Talk to the Community</button></a>
+            </div>
+            <div class="row2--element">
+                <h2>Memes Collection</h2>
+                <p >Sometimes all you need to get you through your day is a laugh</p><br>
+                <a href="{% url 'memes' %}"><button class="row2--button">Have a laugh</button></a>
+            </div>
+            <div class="row2--element">
+                <h2>Mental Health Resources</h2>
+                <p>Articles and tips for better mental health</p><br>
+                <a href="{% url 'resources' %}"><button class="row2--button">Explore</button></a>
+            </div>
+        </div>
+    </main>
+    <script>
+
+        function saveFormData() {
+            var form = document.getElementsByClassName('row1--form');
+            var formData = new FormData(form);
+    
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/log_mood/', true);
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    alert(response.message);
+                    // Update the section with the form if needed
+                    document.getElementById('mood--row').innerHTML = response.quote;
+                } else {
+                    alert('Error saving data');
+                }
+            };
+            xhr.send(formData);
+        }
+
+        function saveJournalEntry() {
+            var form = document.getElementsByClassName('row2--form');
+            var formData = new FormData(form)
+
+            var entry = new XMLHttpRequest();
+            entry.open('POST', '/', true);
+            entry.onload = function () {
+                if (entry.status == 200) {
+                    var response = JSON.parse(entry.responseText);
+                    alert(response.message);
+
+                } else {
+                    alert('Error saving data')
+                }
+            };
+        }
+        
+    </script>
+
+{% endblock %}

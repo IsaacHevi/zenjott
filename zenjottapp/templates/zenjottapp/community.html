@@ -1,0 +1,63 @@
+{% extends 'zenjottapp/layout.html' %}
+
+{% block title %}Community {% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="journal--header">
+            <h2 style="font-weight: bold;">Community Posts</h2>
+        </div>
+        <div class="posts--container">
+            {% if grouped_posts %}
+            {% for date, posts in grouped_posts.items %}
+                <p style="text-align: center; font-style: italic; color: #777; margin-top: 15px;">{{ date }}</p>
+                {% for post in posts %}
+                <div class="post" style="margin-top: 15px;">
+                    <div class="post--header" style="font-weight: bold;">
+                        <span>@{{ post.user }}</span>
+                    </div>
+                    <div class="post--content">
+                        <div>
+                            {{ post.content }} <strong>#zenjott</strong>
+                        </div>
+                        <div style="color: #777; margin: auto 0 auto 10px;">
+                            {{ post.time }}
+                        </div>
+                    </div>
+                    <div class="post--footer" style="display: flex;">
+                        <a href="{% url 'comment' post.id %}" style="text-decoration: none; color: #777;"><div>{{ post.comment_set.count }} <i class="fa fa-comments-o" style="font-size:20px"></i></i></div></a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+            {% else %}
+            <p style="text-align: center; font-style: italic;">There are no posts yet</p>
+            {% endif %}
+        </div>
+            <a href="{% url 'create' %}"><button class="post--button"><i class="material-icons" style="font-size:36px">mode_edit</i></button></a>
+    </main>
+    <script>
+        const likeButtons = document.querySelectorAll('.like')
+        likeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.style.color == 'rgb(125, 124, 124)') {
+                btn.style.color = 'rgb(0, 0, 0)';
+                } else {
+                    btn.style.color = 'rgb(125, 124, 124)';
+                }
+            })
+        })
+    </script>
+{% endblock %}

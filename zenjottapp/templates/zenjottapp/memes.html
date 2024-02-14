@@ -1,0 +1,152 @@
+{% extends 'zenjottapp/layout.html' %}
+{% load static %}
+
+{% block title %}Zenjott{% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div class="meme--div">
+        <img src="" alt="Meme photo" class="meme--image" id="displayedImage">
+    </div>
+    <div class="meme--info">
+        <p style="font-weight: 900; font-style: italic;">Did you laugh?</p>
+        <button onclick="laughed()">Yes</button><button onclick="changeMeme()">No</button>
+        <button id="goBack" style="display: none;">Go Back</button>
+    </div><br><br>
+    <div class="meme--info" id="memeInfo" style="display: none;">
+        <p style="font-weight: 900; font-style: italic;" id="memeP">I'm glad I was able to make you laugh :)</p>
+        <button onclick="goBack()">Go Back</button>
+    </div><br><br>
+
+    <script>
+        const imageArray = [
+        "{% static 'memes/IMG_20240202_042732_603.jpg' %}",
+        "{% static 'memes/IMG_20240202_042735_142.jpg' %}",
+        "{% static 'memes/IMG_20240202_042738_758.jpg' %}",
+        "{% static 'memes/IMG_20240202_042755_646.jpg' %}",
+        "{% static 'memes/IMG_20240202_042801_833.jpg' %}",
+        "{% static 'memes/IMG_20240202_042806_458.jpg' %}",
+        "{% static 'memes/IMG_20240202_042811_196.jpg' %}",
+        "{% static 'memes/IMG_20240202_042817_144.jpg' %}",
+        "{% static 'memes/IMG_20240202_042827_397.jpg' %}",
+        "{% static 'memes/IMG_20240202_042840_222.jpg' %}",
+        "{% static 'memes/IMG_20240202_042848_272.jpg' %}",
+        "{% static 'memes/IMG_20240202_042911_674.jpg' %}",
+        "{% static 'memes/IMG_20240202_042914_139.jpg' %}",
+        "{% static 'memes/IMG_20240202_042917_682.jpg' %}",
+        "{% static 'memes/IMG_20240202_042920_944.jpg' %}",
+        "{% static 'memes/IMG_20240202_042925_458.jpg' %}",
+        "{% static 'memes/IMG_20240202_042929_029.jpg' %}",
+        "{% static 'memes/IMG_20240202_042935_850.jpg' %}",
+        "{% static 'memes/IMG_20240202_042942_705.jpg' %}",
+        "{% static 'memes/IMG_20240202_042958_966.jpg' %}",
+        "{% static 'memes/IMG_20240202_043014_275.jpg' %}",
+        "{% static 'memes/IMG_20240202_043017_560.jpg' %}",
+        "{% static 'memes/IMG_20240202_043035_252.jpg' %}",
+        "{% static 'memes/IMG_20240202_043039_415.jpg' %}",
+        "{% static 'memes/IMG_20240202_043051_474.jpg' %}",
+        "{% static 'memes/IMG_20240202_043059_312.jpg' %}",
+        "{% static 'memes/IMG_20240202_043107_126.jpg' %}",
+        "{% static 'memes/IMG_20240202_043119_990.jpg' %}",
+        "{% static 'memes/IMG_20240202_043126_760.jpg' %}",
+        "{% static 'memes/IMG_20240202_043133_733.jpg' %}",
+        "{% static 'memes/IMG_20240202_043143_454.jpg' %}",
+        "{% static 'memes/Screenshot_20230125-001013_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230225-182154_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230225-210029_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230227-202358_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230303-224856_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230303-224959_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230303-225340_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230304-124753_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230309-213838_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230311-212931_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230311-213144_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230314-072531_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230317-210508_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230319-220914_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230319-225438_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230327-223930_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230406-102229_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230407-151929_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230502-194326_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230502-195246_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20230516-224354_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230516-231949_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230517-175310_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230624-141427_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230627-234902_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230628-000040_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230629-231900_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230703-221800_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230710-222018_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230710-222051_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230714-144839_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230727-213747_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230811-103950_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230818-162349_Instagram.jpg' %}",
+        "{% static 'memes/Screenshot_20230820-191328_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230828-194612_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230902-201508_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230902-201527_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230905-071016_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230906-181924_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230908-102827_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230908-103024_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230908-170140_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20230915-184012_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20231003-084323_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20231008-113603_X.jpg' %}",
+        "{% static 'memes/Screenshot_20231010-083647_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20231025-102248_X.jpg' %}",
+        "{% static 'memes/Screenshot_20231028-151544_X.jpg' %}",
+        "{% static 'memes/Screenshot_20231106-194206_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20231123-205720_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20231127-163220_Snapchat.jpg' %}",
+        "{% static 'memes/Screenshot_20231208-130815_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20231221-202927_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20231226-140451_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20231229-214643_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20240102-235727_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20240111-221102_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20240114-083044_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20240116-132115_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20240119-212547_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20240201-230736_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20240202-080450_WhatsApp.jpg' %}",
+        "{% static 'memes/Screenshot_20240202-082221_WhatsApp.jpg' %}",
+    ];
+        var randomIndex = Math.floor(Math.random() * imageArray.length);
+        var imageElement = document.getElementById('displayedImage');
+        imageElement.src = imageArray[randomIndex];
+    
+        function changeMeme() {
+            const randomIndex = Math.floor(Math.random() * imageArray.length);
+            const imageElement = document.getElementById('displayedImage');
+            imageElement.src = imageArray[randomIndex];
+        }
+
+        function laughed() {
+            document.querySelector('.meme--div').style.display = 'none';
+            document.querySelector('.meme--info').style.display = 'none';
+            document.querySelector('#memeInfo').style.display = 'block';
+
+        }
+
+        function goBack() {
+            window.history.back()
+        }
+    </script>
+
+{% endblock %}

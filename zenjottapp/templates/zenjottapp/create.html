@@ -1,0 +1,30 @@
+{% extends 'zenjottapp/layout.html' %}
+
+{% block title %}Create Post {% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="journal--header">
+            <h2 style="font-weight: bold;">Create New Post</h2>
+        </div>
+        <div class="single--div">
+            <form action="{% url 'make_post' %}" class="add--post--form" method="post">
+                {% csrf_token %}
+                <textarea id="newPost" name="newPost" rows="4" required placeholder="What's on your mind?" autofocus="on" style="font-style: italic;"></textarea>
+                <button>Post</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

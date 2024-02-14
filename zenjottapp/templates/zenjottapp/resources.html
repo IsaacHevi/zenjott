@@ -1,0 +1,48 @@
+{% extends 'zenjottapp/layout.html' %}
+
+{% block title %}Tips and Resources{% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <h2 style="text-align: center;">Articles on Mental Health</h2>
+    <div class="single--div">
+        <div class="entry">
+            <p>WHAT IS MENTAL HEALTH?
+                Mental health includes our emotional, psychological, and social well-being. It affects how we think, feel, and act. It also helps determine how we handle stress, relate to others, and make healthy choices.1 Mental health is important at every stage of life, from childhood and adolescence through adulthood. <a href="https://www.cdc.gov/mentalhealth/learn/index.htm">Click to read</a></p>
+        </div>
+        <div class="entry">
+            <p>Looking to boost your mood, handle your emotions better, or build resilience? These six life-changing strategies for improving mental health and well-being can show you how. <a href="https://www.helpguide.org/articles/mental-health/building-better-mental-health.htm">Click to read</a></p>
+        </div>
+        <div class="entry">
+            <p>THE IMPORTANCE OF MENTAL HEALTH AWARENESS. Mood disorders, such as depression and bipolar depression, affect nearly 10% of adults each year and are characterized by difficulties in regulating one's mood... <a href="https://www.pinerest.org/newsroom/articles/mental-health-awareness-blog/">Click to read</a></p>
+        </div>
+        <div class="entry">
+            <p>MIND BOOSTERS. Everyone goes through periods when they feel low, lethargic, or stressed. These episodes usually pass after a while, but if symptoms linger or begin to interfere with daily life, people should seek professional help. Otherwise, people can take several steps to boost their mood, such as exercising more, spending time outdoors, volunteering, meditating, and keeping a gratitude journal. <a href="https://www.health.harvard.edu/mind-and-mood/mood-boosters">Click to read</a></p>
+        </div>
+        <div class="entry">
+            <p>Try this: How to change your negative thoughts. People can't control the outside world, but they can control their reactions to it. A technique called cognitive restructuring can help a person change negative thinking and calm stressful reactions. It involves a four-step process, known as "stop, breathe, reflect, choose. <a href="https://www.health.harvard.edu/mind-and-mood/try-this-how-to-change-your-negative-thoughts">Click to read</a></p>
+        </div>
+    </div><br><br>
+    <h2 style="text-align: center;">Need Help??? It's okay to ask for help</h2>
+    <div class="single--div">
+        <p><strong>Mental Health Society of Ghana (MEHSOG)</strong> is a broad-based grassroots membership association of mental health and epilepsy service users and their primary carer-givers with members across Ghana. It is a non-governmental organization which works to represent the needs and interest of people with mental illness or epilepsy as well as their primary care-givers and families or in appropriate for a needing articulation of the inclusion of people with mental illness or and their carer-givers. The association has a membership of over 18,000 across the Country.</p>
+        <h4>Contact:</h4>
+        <div>
+            <i class="fa fa-phone" style="font-size:24px"> +233 302 772003 / 781712</i>
+        </div>
+        <div>
+            <i class="fa fa-envelope" style="font-size:24px"> info@mehsog.org</i>
+        </div>
+    </div><br><br>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'zenjottapp/layout.html' %}
+
+{% block title %}Journal {% endblock %}
+
+{% block status %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}" style="font-weight: 600;">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'journal' %}" style="font-weight: 600;">Journal</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'moodtracker' %}" style="font-weight: 600;">Mood Tracker</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="journal--header">
+            <h2>Journal Entries</h2>
+            <p>Read your past entries and reflect on your journey</p>
+        </div>
+        <div class="entries--container">
+            {% if entries %}
+            {% for entry in entries %}
+                <a href="{% url 'entry' entry.pk %}" style="text-decoration: none; color: rgb(54, 50, 50);">
+                    <div class="entry">
+                    {% if entry.title %}
+                    <h4>{{ entry.title }}</h4>
+                    {% endif %}
+                    <p>{{ entry.short_content }}...</p>
+                    <span>{{ entry.date}} || {{ entry.time }}</span>
+                </div></a>
+            {% endfor %}
+        {% else %}
+        <p style="text-align: center; font-style: italic; margin-top: 20px;">You have no journal entries yet.</p>
+        {% endif %}
+        </div>
+        <a href="{% url 'new_entry' %}"><button class="post--button">+</button></a>
+    </main>
+{% endblock %}
