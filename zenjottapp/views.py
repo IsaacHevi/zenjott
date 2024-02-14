@@ -224,8 +224,7 @@ def register(request):
         if form.is_valid():
             print("Form is valid")
             form.save()
-            login(request, request.user)
-            return redirect('index')
+            return redirect('signin')
         else:
             print("Form is not valid:", form.errors)
     else:
