@@ -42,3 +42,5 @@ zenjott is a web application designed to support users in tracking their mental 
 ## Contributing
 Contributions are welcome! Please fork the repository and create a pull request for any new features, improvements, or bug fixes.
 
+## [GO LIVE](https://zenjott-dev-cgeh.2.us-1.fl0.io/)
+
