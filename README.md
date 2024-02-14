@@ -36,8 +36,8 @@ zenjott is a web application designed to support users in tracking their mental 
 ## Technologies Used
 - Frontend: HTML, CSS, JavaScript
 - Backend: Django
-- Database: SQL
-- Authentication: Django Authentication, Google OAuth
+- Database: PostgreSQL
+- Authentication: Django Authentication
 
 ## Contributing
 Contributions are welcome! Please fork the repository and create a pull request for any new features, improvements, or bug fixes.
