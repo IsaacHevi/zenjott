@@ -1,0 +1,434 @@
+body {
+    background-color: rgb(240, 234, 234);
+    margin: 0;
+    padding: 0;
+    color: rgb(54, 50, 50);
+    font-family: 'Inter', sans-serif;
+    padding-top: 105px;
+}
+
+.navbar {
+    width: 100%;
+    position: fixed;
+    background-color: #ffffff;
+    overflow: visible;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    padding: 0;
+    width: 212px;
+    height: 70px;
+    margin: 0;
+}
+.row1--element {
+    background-color: #ffffff;
+    height: 340px;
+    border-radius: 7px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    width: calc(50% - 40px);
+    float: left;
+    overflow: inherit;
+}
+
+.mood--element {
+    display: inline-block;
+}
+
+@media screen and (max-width: 768px) {
+    .mood--element {
+        margin-bottom: 10px;
+        overflow: scroll;
+    }
+}
+@media (max-width: 900px) {
+    .row1--element {
+        width: calc(100% - 40px);
+    }
+}
+
+.row1--form {
+    max-width: 600px;
+    margin: 0;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.row1--button {
+    margin-top: 5px;
+    background-color: black;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.row1--button:hover {
+    background-color: rgb(68, 60, 60);
+}
+
+.row1--form > input, textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.row2--element {
+    position: relative;
+    background-color: #fff;
+    text-align: center;
+    height: 250px;
+    border-radius: 7px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    width: calc(33.33% - 40px);
+    float: left;
+}
+
+@media (max-width: 900px) {
+    .row2--element {
+        width: calc(50% - 40px);
+    }
+}
+
+@media (max-width: 600px) {
+    .row2--element {
+        width: calc(100% - 40px);
+    }
+}
+
+.row2--button {
+    position: absolute;
+    margin: auto;
+    margin-top: 5px;
+    width: calc(97% - 10px);
+    right: 3%;
+    bottom: 5%;
+    padding: 10px;
+    background-color: black;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+.row2--button:hover {
+    background-color: rgb(68, 60, 60);
+}
+
+.mood--container {
+    position: relative;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.mood-selector {
+    text-align: center;
+}
+
+.mood-selector label {
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid #4e4b4b;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.mood-selector label:hover {
+    background-color: #c9c9c9;
+}
+
+.mood-selector input[type="radio"] {
+    display: none;
+}
+
+.mood-selector input[type="radio"]:checked + label {
+    background-color: #c9c9c9;
+    color: #000000;
+    border-color: #c9c9c9;
+}
+
+.mood-selector input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.mood-selector button {
+    text-align: left;
+}
+.journal--header {
+    text-align: center;
+
+}
+
+.entry {
+    position: relative;
+    padding: 20px;
+    margin: 30px auto;
+    width: calc(95% - 40px);
+    background-color: #e2e2e2;
+    border-radius: 4px 10px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+.single--div {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+@media (max-width: 900px) {
+    .single--div {
+        width: calc(50% - 40px);
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .single--div {
+        width: calc(100% - 40px);
+        margin: 0 auto;
+    }
+}
+
+.meme--div {
+    max-width: 400px;
+    margin: auto;
+}
+
+.meme--image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+@media (max-width: 900px) {
+    .meme--div {
+        width: calc(50% - 40px);
+    }
+}
+
+@media (max-width: 600px) {
+    .meme--div {
+        width: calc(100% - 40px);
+    }
+}
+
+.meme--info {
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 20px 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    background-color: white;
+    padding: 20px;
+}
+
+@media (max-width: 900px) {
+    .meme--info {
+        width: calc(50% - 40px);
+    }
+}
+
+@media (max-width: 600px) {
+    .meme--info {
+        width: calc(100% - 40px);
+    }
+}
+
+.meme--info > button {
+    margin: 10px 20px;
+    background-color: black;
+    padding: 5px 20px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.entry--button {
+    margin: 10px 20px;
+    background-color: black;
+    padding: 5px 20px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.entry--button:hover {
+    background-color: rgb(68, 60, 60);
+}
+
+.meme--info > button:hover {
+    background-color: rgb(68, 60, 60);
+}
+
+.post {
+    position: relative;
+    padding: 20px;
+    margin: 30px auto;
+    width: calc(95% - 40px);
+    background-color: #ffffff;
+    border-radius: 4px 10px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.post--content {
+    display: flex;
+    justify-content: space-between;
+}
+.post--footer {
+    margin-top: 10px;
+    color: #777;
+}
+
+.post--container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.post--button {
+    margin: auto 5px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    border: none;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.post--button:hover {
+    background-color: rgb(78, 78, 78);
+}
+
+.add--post--form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.add--post--form > textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.add--post--form > button {
+    text-align: center;
+    margin: 10px auto;
+    background-color: black;
+    padding: 5px 20px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add--post--form > button:hover {
+    background-color: rgb(68, 60, 60);
+}
+
+#chartContainer {
+    position: relative;
+    overflow: hidden;
+    height: 270px;
+    margin: auto;
+    padding: 10px;
+    width: calc(80% - 20px);
+    overflow: inherit;
+}
+
+.pie--chart {
+    position: absolute;
+    left: 0; 
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 500px;
+    height: 340px;
+}
+
+.chartjs-render-monitor .chart-legend {
+    position: relative;
+    bottom: 0;
+    right: 0;
+}
+
+#quote {
+    margin: auto;
+    margin-top: 100px;
+    font-size: larger;
+    text-align: center;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+#note--container {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    padding: 20px;
+    margin: 30px auto;
+    width: calc(100% - 20px);
+    background-color: #e2e2e2;
+    border-radius: 4px 10px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+#note {
+    text-align: center;
+    margin: auto;
+    width: calc(70% - 15px);
+}
+
+#mood--date {
+    width: calc(15% - 1px);
+    margin: auto;
+    text-align: center;
+}
+
+#mood--mood {
+    width: calc(15% - 1px);
+    text-align: center;
+    margin: auto;
+}
+
+.comment {
+    position: relative;
+    padding: 20px;
+    margin: 30px;
+    width: calc(60% - 40px);
+    background-color: #adadad;
+    border-radius: 4px 10px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
